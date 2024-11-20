@@ -58,9 +58,6 @@ root/
 * words are separated by spaces or newlines; tabs are NOT SUPPORTED
 
 
-
-## Supported operations
-
 ### Operators on integers
 For any operator where order matters, eg. subtraction, multiplication, etc., we
 always use the top of the stack as the "second" number. IE. if the stack
