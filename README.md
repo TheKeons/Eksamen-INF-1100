@@ -49,7 +49,8 @@ root/
 ```
 
 
-## General info
+## 8Inf documentation 
+
 * anything enclosed in `()` is a comment
 * anything enclosed in `~~` is a string
 * anything prefaced by `.` is an operation 
