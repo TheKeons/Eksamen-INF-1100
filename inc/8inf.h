@@ -1,48 +1,103 @@
 #ifndef INF_H_
 #define INF_H_
 
+// Forward declaration of Stack structure
 struct stack;
 typedef struct stack Stack;
 
+// Forward declaration of Stack_Element structure
 struct Stack_Element;
 typedef struct Stack_Element stack_element_t;
 
+// Stack operations
 
-// stack operations
+/**
+ * Removes and returns the top element of the stack.
+ */
+stack_element_t pop(Stack *stack);
 
-stack_element_t pop(Stack *stack); // returns the top of stack and removes it from stack
+/**
+ * Adds an element to the top of the stack.
+ */
+void push(Stack *stack, stack_element_t value);
 
-void push(Stack *stack, stack_element_t value); // adds to top of stack
+/**
+ * Duplicates the top element of the stack.
+ */
+void dup(Stack *stack);
 
-void dup(Stack *stack); // pushes a duplicate of the top of the stack
+/**
+ * Swaps the two top elements of the stack.
+ */
+void swap(Stack *stack);
 
-void swap(Stack *stack);    // swaps the two top numbers of stakk
+/**
+ * Checks if the stack is full.
+ * Returns 1 if full, 0 otherwise.
+ */
+int is_full(Stack *stack);
 
-int is_full(Stack *stack);  // is the stack full
+/**
+ * Checks if the stack is empty.
+ * Returns 1 if empty, 0 otherwise.
+ */
+int is_empty(Stack *stack);
 
-int is_empty(Stack *stack); // is the stack full
+// Arithmetic operations
 
+/**
+ * Pops two numbers from the stack and pushes their sum.
+ */
+void sum(Stack *stack);
 
-// 8INF operations
+/**
+ * Pops two numbers from the stack and pushes their difference.
+ */
+void difference(Stack *stack);
 
-void sum(Stack *stack); // pops two numbers from the stack and pushes the sum
+/**
+ * Pops two numbers from the stack and pushes their product.
+ */
+void multiply(Stack *stack);
 
-void differance(Stack *stack); // pops two nummbers from stack and pushes the diferance
+/**
+ * Pops two numbers from the stack and pushes their quotient.
+ * Handles division by zero appropriately.
+ */
+void quotient(Stack *stack);
 
-void multible(Stack *stack);    // pops two numbers from stack and pushes the multible
+/**
+ * Pops two numbers from the stack and pushes their modulus.
+ */
+void modulus(Stack *stack);
 
-void quotient(Stack *stack);    // pops two numbers from stack and pushes the quotient
+// Comparison operations
 
-void modulus(Stack *stack);     // pops two numbers from stack and pushes the modelus
+/**
+ * Pops two numbers from the stack and pushes 1 if they are equal, 0 otherwise.
+ */
+void is_equal(Stack *stack);
 
-void is_equal(Stack *stack);    // pops two numbers from stack and pushes 1 if equal and 0 if not
+/**
+ * Pops two numbers from the stack and pushes 1 if the second number is greater, 0 otherwise.
+ */
+void is_greater_than(Stack *stack);
 
-void is_greater_than(Stack *stack);     // pops two numbers from stack and pushes 1 if greater than and 0 if not
+// Control flow operations
 
-char **cjump(Stack *stack, char** program); // pops two numbers. if the second number is not `0` the program jumps by the first number.
+/**
+ * Pops two numbers from the stack. If the second number is not 0,
+ * the program pointer jumps by the value of the first number.
+ * Returns the updated program pointer.
+ */
+char **cjump(Stack *stack, char **program);
 
-// misc
+// Miscellaneous
 
-int is_valid_number(char *string);  // checks if a stirng is purely numerical
+/**
+ * Checks if a string is a valid numerical value.
+ * Returns 1 if valid, 0 otherwise.
+ */
+int is_valid_number(char *string);
 
-#endif 
+#endif // INF_H_

@@ -1,3 +1,54 @@
+## How to run
+
+1. Compile the final implementation
+```
+make 8inf
+```
+2. Compile the first implementation
+```
+make first
+```  
+
+3. Execute 8inf code
+```
+./8inf file/code.8f
+```
+
+
+
+
+## File structure
+
+```
+root/
+├── experiments/          # Directory for experimental scripts and related files
+│   ├── megaloop.8f       # Experimental file written in 8f format
+│   ├── megaloop.c        # C implementation of the megaloop functionality
+│   └── megaloop.py       # Python script for megaloop-related processing
+│
+├── first_implementation/ # Initial implementations and related files
+│   ├── First_8inf.c      # C implementation of the first approach
+│   └── first_8inf.h      # Header file for First_8inf.c
+│
+├── inc/                  # Include files (header files)
+│   ├── 8inf.h            # Core header file for 8inf implementation
+│   └── lexer_preprocessor.h # Header file for the lexer preprocessor module
+│
+├── scripts/              # Additional scripts for testing and comparisons
+│   ├── hello_world.8f    # Example "Hello World" program in 8f format
+│   ├── integer_ops.8f    # Integer operations script in 8f format
+│   └── loop.8f           # Loop demonstration script in 8f format
+│
+├── src/                  # Source code directory
+│   └──  lexer_preprocessor.c  # Source code for the lexer preprocessor module
+│
+├── 8inf.c                # Source code for the 8inf implementation
+├── Exam-Inf-1100.pdf     # Report outlining the development
+├── Makefile              # Build system configuration for the project
+├── README.md             # Project documentation (this file)
+```
+
+
 ## General info
 * anything enclosed in `()` is a comment
 * anything enclosed in `~~` is a string
@@ -5,9 +56,7 @@
 * anything else is an integer
 * words are separated by spaces or newlines; tabs are NOT SUPPORTED
 
-## How to compile
-* make (for final implementation)
-* make first (for first implementation)
+
 
 ## Supported operations
 

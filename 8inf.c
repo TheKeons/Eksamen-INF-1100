@@ -53,13 +53,11 @@ void push(Stack *stack, stack_element_t value) {
   stack->arr[stack->top_index] = value;
 }
 
-// duplicates the top value
 void dup(Stack *stack) {
   stack_element_t top_value = stack->arr[stack->top_index];
   push(stack, top_value);
 }
 
-//  swaps the two top values
 void swap(Stack *stack) {
   stack_element_t a = pop(stack);
   stack_element_t b = pop(stack);
@@ -70,7 +68,7 @@ void swap(Stack *stack) {
 
 // 8inf functions
 
-void sum(Stack *stack) { // pops two numbers from the stack and pushes the sum
+void sum(Stack *stack) {
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
@@ -79,8 +77,7 @@ void sum(Stack *stack) { // pops two numbers from the stack and pushes the sum
   push(stack, result);
 }
 
-void differance(
-    Stack *stack) { // pops two nummbers from stack and pushes the diferance
+void difference(Stack *stack) {
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
@@ -89,8 +86,7 @@ void differance(
   push(stack, result);
 }
 
-void multible(
-    Stack *stack) { // pops two numbers from stack and pushes the multible
+void multiply(Stack *stack) {
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
@@ -99,8 +95,7 @@ void multible(
   push(stack, result);
 }
 
-void quotient(
-    Stack *stack) { // pops two numbers from stack and pushes the quotient
+void quotient(Stack *stack) {
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
@@ -108,14 +103,14 @@ void quotient(
     stack_element_t result = {
         .type = INT_TYPE, .data.Integer = (a.data.Integer / b.data.Integer)};
     push(stack, result);
+
   } else {
     printf("Divison by zero");
     return;
   }
 }
 
-void modulus(
-    Stack *stack) { // pops two numbers from stack and pushes the modelus
+void modulus(Stack *stack) {
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
@@ -123,6 +118,7 @@ void modulus(
     stack_element_t result = {
         .type = INT_TYPE, .data.Integer = (a.data.Integer % b.data.Integer)};
     push(stack, result);
+
   } else {
     printf("Divison by zero");
     return;
@@ -209,14 +205,15 @@ void interpret(Stack *stack, char **program) {
 
       else if (is_valid_number(string)) { // if string is purely numerical
 
-        stack_element_t number = {.type = INT_TYPE, .data.Integer = atoi(string)};
+        stack_element_t number = {.type = INT_TYPE,
+                                  .data.Integer = atoi(string)};
         push(stack, number);
       }
 
       else {
         // error handling incase pc is not a valid number
-        fprintf(stderr, "%s is not a number: file: %s line: %d\n", *pc, __FILE__,
-                __LINE__);
+        fprintf(stderr, "%s is not a number: file: %s line: %d\n", *pc,
+                __FILE__, __LINE__);
         exit(EXIT_FAILURE);
       }
     }
@@ -228,11 +225,11 @@ void interpret(Stack *stack, char **program) {
       }
 
       else if (strcmp(*pc, ".-") == 0) {
-        differance(stack);
+        difference(stack);
       }
 
       else if (strcmp(*pc, ".*") == 0) {
-        multible(stack);
+        multiply(stack);
       }
 
       else if (strcmp(*pc, "./") == 0) {
@@ -276,8 +273,8 @@ void interpret(Stack *stack, char **program) {
 
       else if (strcmp(*pc, ".cjump") == 0) {
         pc = cjump(stack, pc);
-      } 
-      
+      }
+
       else {
         printf("%s Unknow operator\n", *pc);
       }
@@ -299,7 +296,7 @@ int main(int argc, char **argv) {
   program = load_program(argv[1]);
 
   interpret(stack, program);
-  
+
   free(stack);
   stack = NULL; // to avoid a dangling pointer
   return 0;
