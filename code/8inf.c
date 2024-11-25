@@ -10,7 +10,7 @@ char **program;
 typedef enum { INT_TYPE, STRING_TYPE } DataType;
 
 struct Stack_Element {
-  DataType type; // type data
+  DataType type; 
 
   union {
     int Integer;
@@ -30,9 +30,11 @@ int is_empty(Stack *stack) { return (stack->top_index <= -1); }
 
 stack_element_t pop(Stack *stack) {
   if (is_empty(stack)) {
+
     // error handling
     fprintf(stderr, "Stack Underflow: file: %s line: %d\n", __FILE__, __LINE__);
     exit(EXIT_FAILURE);
+
   } else {
     stack_element_t top_value = stack->arr[stack->top_index]; // get the vaule
     stack->top_index = stack->top_index - 1; // moves the index down one
@@ -125,37 +127,35 @@ void modulus(Stack *stack) {
   }
 }
 
-void is_equal(Stack *stack) { // pops two numbers from stack and pushes 1 if
-                              // equal and 0 if not
+void is_equal(Stack *stack) { 
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
   if (a.data.Integer == b.data.Integer) {
     stack_element_t result = {.type = INT_TYPE, .data.Integer = 1};
     push(stack, result);
+
   } else {
     stack_element_t result = {.type = INT_TYPE, .data.Integer = 0};
     push(stack, result);
   }
 }
 
-void is_greater_than(Stack *stack) { // pops two numbers from stack and pushes 1
-                                     // if greater than and 0 if not
+void is_greater_than(Stack *stack) {
   stack_element_t b = pop(stack);
   stack_element_t a = pop(stack);
 
   if (a.data.Integer > b.data.Integer) {
     stack_element_t result = {.type = INT_TYPE, .data.Integer = 1};
     push(stack, result);
+    
   } else {
     stack_element_t result = {.type = INT_TYPE, .data.Integer = 0};
     push(stack, result);
   }
 }
 
-char **cjump(Stack *stack,
-             char **program) { // pops two numbers. if the second number is not
-                               // `0` the program jumps by the first number
+char **cjump(Stack *stack, char **program) {
   int first = pop(stack).data.Integer;
   int second = pop(stack).data.Integer;
 
@@ -190,11 +190,12 @@ int is_valid_number(char *string) {
 
 void interpret(Stack *stack, char **program) {
   for (char **pc = program; *pc != NULL; pc++) {
-    if (*pc[0] != '.') { // if the line is an integer
+    if (*pc[0] != '.') { // if not an operation
       char *string = *pc;
       int length = strlen(string);
 
-      if (*pc[0] == '~') {
+      if (*pc[0] == '~') { // if sting
+
         // removes the ~ from the string
         memmove(string, string + 1, length - 2);
         string[length - 2] = '\0';
@@ -211,7 +212,7 @@ void interpret(Stack *stack, char **program) {
       }
 
       else {
-        // error handling incase pc is not a valid number
+        // error handling in case pc is not a valid number
         fprintf(stderr, "%s is not a number: file: %s line: %d\n", *pc,
                 __FILE__, __LINE__);
         exit(EXIT_FAILURE);
